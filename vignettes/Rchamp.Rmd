@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 # Yo this is my first ever package, just testing some stuff out. 
 
 ```{r setup}
-devtools::install_github('mowgl-i/Rchamp@main')
+devtools::install_github('mowgl-i/Rchamp@Development')
 library(Rchamp)
 
 Rchamp::simple_function()
