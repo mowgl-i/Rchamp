@@ -16,7 +16,7 @@ get_clip <- function(clip_id){
   client_secret <- Sys.getenv("TWITCH_CLIENT_SECRET")
 
   url <- 'https://api.twitch.tv/kraken/clips/'
-  o <- GET(paste(url,clip_id,sep = ""),config = add_headers('client-id'=client_id, 'Accept'='application/vnd.twitchtv.v5+json')) %>% content()
+  o <- GET(paste(url,clip_id,sep = ""),config = add_headers('client-id'=client_id, 'Accept'='application/vnd.twitchtv.v5+json')) %>% content() # used this to get clip-id
 
   if(!is.null(o$error) && o$error=="Unauthorized") stop(o$message)
   if(length(o$data)<1) stop("No results for this query parameters.")

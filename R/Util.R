@@ -6,3 +6,4 @@ query_list <- function(...){
     setNames(
       unlist(a), rep(names(a), sapply(a, length))))
 }
+
