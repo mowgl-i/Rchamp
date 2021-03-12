@@ -11,6 +11,9 @@ get_vod <- function(client_id,vod_id){
   vod <- GET(link) %>% content()
 }
 
+
+vod
+
 o$vod$url
 vod_id<-o$vod$id
 clip_offset<-o$vod$offset # start of clip
@@ -22,7 +25,14 @@ messages_json = c()
 
 pre_link <- 'https://api.twitch.tv/v5/videos/'
 
-chats = NA
+chats = '{"comments": [[{"id":"12304987","content_offset_seconds":"0.1"}],
+                      [{"id":"12304987","content_offset_seconds":"0.1"}]] ,
+                      "_prev":"arsotn_",
+                      "_next":"arstnnn_"}'
+
+
+chats<-fromJSON(chats)
+
 
 while(is.na(chats) | (names(chats[2]) == '_next'& chats$comments[[1]]$content_offset_seconds < endofclipoffset+1)){ # so long as chat is null or the offset is less than clip offset -> next.
   if (!is.na(chats) & names(chats[2]) == '_next'){ # can't use [2] because after the first one, [2] is == '_prev'
