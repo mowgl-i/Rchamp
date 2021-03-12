@@ -1,37 +1,49 @@
+#'  Get Clip
+#'  @return VOD INFO
+#'  @export
+#'  @references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
+#'  @import dplyr
+#'  @import httr
+#' @importFrom purrr simplify_all
+#' @importFrom purrr transpose
+#' @importFrom httr content
+#' @importFrom httr GET
+#' @importFrom magrittr %>%
 
 
-get_vod <- function(client_id,vod_id){
 
-  httr::set_config(httr::add_headers('Client-ID' = client_id))# 'Accept'='application/vnd.twitchtv.v5+json'))
+get_vod <- function(vod_id){
+
+  client_id <- Sys.getenv("TWITCH_CLIENT_ID")
+  #client_secret <- Sys.getenv("TWITCH_CLIENT_SECRET")
+  httr::set_config(httr::add_headers('client-id'=client_id, 'Accept'='application/vnd.twitchtv.v5+json'))
+
   pre <- 'https://api.twitch.tv/kraken/videos/v'
   link <- paste(pre,vod_id,sep = "")
-  link <- paste(pre,o$vod$id,sep = "")
-
-
-  vod <- GET(link) %>% content()
+  #link <- paste(pre,o$vod$id,sep = "")
+  vod_data <- httr::GET(link)
+  vod_content <- httr::content(vod_data)
+  return(list(vod_data,vod_content))
 }
 
-
-vod
-
-o$vod$url
-vod_id<-o$vod$id
-clip_offset<-o$vod$offset # start of clip
-
-endofclipoffset = (o$vod$offset + o$duration)
-
-messages_json = c()
+#test <- get_vod(clip$vod$id)
 
 
-pre_link <- 'https://api.twitch.tv/v5/videos/'
-
-chats = '{"comments": [[{"id":"12304987","content_offset_seconds":"0.1"}],
-                      [{"id":"12304987","content_offset_seconds":"0.1"}]] ,
-                      "_prev":"arsotn_",
-                      "_next":"arstnnn_"}'
 
 
-chats<-fromJSON(chats)
+# pre_link <- 'https://api.twitch.tv/v5/videos/'
+
+# chats -------------------------------------------------------------------
+
+#
+# chats = '{"comments": [[{"id":"12304987","content_offset_seconds":"0.1"}],
+#                       [{"id":"12304987","content_offset_seconds":"0.1"}]] ,
+#                       "_prev":"arsotn_",
+#                       "_next":"arstnnn_"}'
+# chats<-fromJSON(chats)
+
+
+# while loop for chat -----------------------------------------------------
 
 
 while(is.na(chats) | (names(chats[2]) == '_next'& chats$comments[[1]]$content_offset_seconds < endofclipoffset+1)){ # so long as chat is null or the offset is less than clip offset -> next.

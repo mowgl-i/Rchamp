@@ -13,20 +13,22 @@
 get_clip <- function(clip_id){
 
   client_id <- Sys.getenv("TWITCH_CLIENT_ID")
-  client_secret <- Sys.getenv("TWITCH_CLIENT_SECRET")
+  #client_secret <- Sys.getenv("TWITCH_CLIENT_SECRET")
+  httr::set_config(httr::add_headers('client-id'=client_id, 'Accept'='application/vnd.twitchtv.v5+json'))
 
   url <- 'https://api.twitch.tv/kraken/clips/'
-  o <- GET(paste(url,clip_id,sep = ""),config = add_headers('client-id'=client_id, 'Accept'='application/vnd.twitchtv.v5+json')) %>% content() # used this to get clip-id
+  clip_data <- httr::GET(paste(url,clip_id,sep = "")) # used this to get clip-id
+  clip_content <- httr::content(clip_data)
+  #clip_data <- httr::GET(paste(url,'GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ',sep = "")) %>% content()
+  if(!is.null(clip_data$status_code) & clip_data$status_code=="200"){
 
-  if(!is.null(o$error) && o$error=="Unauthorized") stop(o$message)
-  if(length(o$data)<1) stop("No results for this query parameters.")
+  }
+  if(length(clip_content)<1) stop("No results for this query parameters.")
+  clip = clip_data
+  return(clip)
 
-  o$data %>% transpose() %>% simplify_all()
 }
 
 #
-#
+# example
 # test<-get_clip('GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ')
-# # example
-#
-# paste(url,'GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ',sep = "")
