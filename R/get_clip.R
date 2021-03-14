@@ -31,4 +31,4 @@ get_clip <- function(clip_id){
 
 #
 # example
-# test<-get_clip('GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ')
+test<-get_clip('GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ')
