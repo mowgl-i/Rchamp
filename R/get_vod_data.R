@@ -1,6 +1,6 @@
 #'  Get Vod Data
 #'  @return VOD INFO
-#'  @export
+
 #'  @references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
 #'  @import dplyr
 #'  @import httr
@@ -9,6 +9,7 @@
 #' @importFrom httr content
 #' @importFrom httr GET
 #' @importFrom magrittr %>%
+#' @export
 
 
 
@@ -32,6 +33,5 @@ get_vod_data <- function(vod_id){
 
 }
 
-test_vodd <- get_vod_data(test_ccdata$vod$id)
 
 

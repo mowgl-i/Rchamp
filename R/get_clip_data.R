@@ -1,6 +1,5 @@
 #'  Get Clip Data
 #'  @return A list with clip information
-#'  @export
 #'  @references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
 #'  @import dplyr
 #'  @import httr
@@ -9,6 +8,7 @@
 #' @importFrom httr content
 #' @importFrom httr GET
 #' @importFrom magrittr %>%
+#' @export
 
 get_clip_data <- function(clip_id){
 

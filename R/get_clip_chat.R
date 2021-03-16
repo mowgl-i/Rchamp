@@ -1,6 +1,5 @@
 #'  Get Clip chat by using vod info
 #'  @return Messages, usernames as list. Message information as json.
-#'  @export
 #'  @references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
 #'  @import dplyr
 #'  @import httr
@@ -11,6 +10,7 @@
 #' @importFrom httr content
 #' @importFrom httr GET
 #' @importFrom magrittr %>%
+#' @export
 
 
 
