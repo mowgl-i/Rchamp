@@ -9,6 +9,7 @@
 #' @importFrom purrr transpose
 #' @importFrom httr content
 #' @importFrom httr GET
+#' @importFrom jsonlite fromJSON
 #' @importFrom magrittr %>%
 #' @export
 
