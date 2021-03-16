@@ -4,7 +4,6 @@
 \alias{get_vod_data}
 \title{Get Vod Data
 @return VOD INFO
-@export
 @references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
 @import dplyr
 @import httr}
@@ -14,7 +13,6 @@ get_vod_data(vod_id)
 \description{
 Get Vod Data
 @return VOD INFO
-@export
 @references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
 @import dplyr
 @import httr

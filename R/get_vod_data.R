@@ -1,6 +1,6 @@
 #'  Get Vod Data
 #'  @return VOD INFO
-#'  @export
+
 #'  @references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
 #'  @import dplyr
 #'  @import httr
@@ -9,6 +9,7 @@
 #' @importFrom httr content
 #' @importFrom httr GET
 #' @importFrom magrittr %>%
+#' @export
 
 
 

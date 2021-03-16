@@ -4,7 +4,6 @@
 \alias{get_clip_chat}
 \title{Get Clip chat by using vod info
 @return Messages, usernames as list. Message information as json.
-@export
 @references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
 @import dplyr
 @import httr
@@ -16,7 +15,6 @@ get_clip_chat(clip_id)
 \description{
 Get Clip chat by using vod info
 @return Messages, usernames as list. Message information as json.
-@export
 @references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
 @import dplyr
 @import httr
