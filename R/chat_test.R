@@ -13,18 +13,18 @@ get_clip <- function(client_id,clip_id){
 
 }
 
-client_id <- Sys.getenv("TWITCH_CLIENT_ID")
-
-clip_id = 'GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ'
-
-
-test<-get_clip('GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ')
-# example
-
-paste(url,'GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ',sep = "")
-
-
-
-o <- GET(link)
-
-client_id
+# client_id <- Sys.getenv("TWITCH_CLIENT_ID")
+#
+# clip_id = 'GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ'
+#
+#
+# test<-get_clip('GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ')
+# # example
+#
+# paste(url,'GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ',sep = "")
+#
+#
+#
+# o <- GET(link)
+#
+# client_id

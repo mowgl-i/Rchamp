@@ -2,20 +2,24 @@
 % Please edit documentation in R/get_clip_chat.R
 \name{get_clip_chat}
 \alias{get_clip_chat}
-\title{getting clip chat
-@return A list with clip information
-@export
-@references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
-@import dplyr
-@import httr}
-\usage{
-get_clip_chat()
-}
-\description{
-getting clip chat
-@return A list with clip information
+\title{Get Clip chat by using vod info
+@return Messages, usernames as list. Message information as json.
 @export
 @references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
 @import dplyr
 @import httr
+@import httr
+@import jsonlite}
+\usage{
+get_clip_chat(clip_id)
+}
+\description{
+Get Clip chat by using vod info
+@return Messages, usernames as list. Message information as json.
+@export
+@references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
+@import dplyr
+@import httr
+@import httr
+@import jsonlite
 }
