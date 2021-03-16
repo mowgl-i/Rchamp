@@ -32,6 +32,5 @@ get_vod_data <- function(vod_id){
 
 }
 
-test_vodd <- get_vod_data(test_ccdata$vod$id)
 
 
