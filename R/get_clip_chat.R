@@ -1,6 +1,14 @@
 #'  Get Clip chat by using vod info
+#'
+#'  @description Uses the clip slug to determine the clip offset and gather the chat from the clip by navitating to the VOD at the offset.
+#'
+#'  @param clip_id the clip slug. Can be found in the url of the twitch clip.
+#'
 #'  @return Messages, usernames as list. Message information as json.
+#'
 #'  @references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
+#'  @references https://github.com/OgulcanCelik/twitch-clip-chat
+#'
 #'  @import dplyr
 #'  @import httr
 #'  @import httr
@@ -41,10 +49,11 @@ get_clip_chat <- function(clip_id){
   messages_json <<- c()
   users <<- c()
   messages <<- c()
+  #badges <<- c()
 
 
 
-  while(( '_next' %in% names(chats) & chats$comments[[1]]$content_offset_seconds < endofclipoffset+0.01)){ # so long as chat is null or the offset is less than clip offset -> next.
+  while(( '_next' %in% names(chats) & chats$comments[[1]]$content_offset_seconds <= endofclipoffset)){ # so long as chat is null or the offset is less than clip offset -> next.
 
     if (chats$`_next` != 'arstnnn_'){
       link <-  paste(pre_link,vod_id,'/comments?cursor=',chats$`_next`, sep = "")
@@ -57,6 +66,7 @@ get_clip_chat <- function(clip_id){
       for(i in attemps){ # should instead put/add a sleep or something for the api
         chats_data<-tryCatch({chats_data <- httr::GET(link)},
                         warning = function(w){is_clip_alb <- "video missing"},
+
                         error = function(e){is_clip_alb <-"video missing"}) # try and run this request
 
         #print(chats_data$status_code)
@@ -75,7 +85,9 @@ get_clip_chat <- function(clip_id){
           if(comment$content_offset_seconds >= clipoffset & comment$content_offset_seconds <= endofclipoffset){
             messages <<- append(messages, comment$message$body)
             users <<- append(users, comment$commenter$display_name)
+            #badges <<- append(badges, comment$message$user_badges[[1]]$`_id`)
             messages_json <<- append(messages_json, comment)
+
           }
         }
 
@@ -86,8 +98,11 @@ get_clip_chat <- function(clip_id){
         else{print('No chats recieved, something is wrong')}
         break
       }}
-}
+  data <- c(list(messages),list(users))
+  chat_dataframe <<- as.data.frame(data, col.names = c('message','user'))
+  }
 
-# messages
-#
-# get_clip_chat('GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ')
+
+
+
+#get_clip_chat('PunchyMagnificentTurtleVoteYea-_nTmbJ654JqTDw5C')

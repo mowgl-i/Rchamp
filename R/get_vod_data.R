@@ -1,6 +1,6 @@
 #'  Get Vod Data
 #'  @return VOD INFO
-
+#'  @param vod_id this vod id can be found after using the get_clip_data function.
 #'  @references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
 #'  @import dplyr
 #'  @import httr
@@ -26,7 +26,7 @@ get_vod_data <- function(vod_id){
   vod_content <- httr::content(vod_data)
 
   if(!is.null(vod_data$status_code) & clip_data$status_code=="200"){
-    print('Success')
+    print('Got the VOD data B)')
     return(vod_content)
   }
   if(length(vod_content)<1){ print("No results for this query parameters.")}
