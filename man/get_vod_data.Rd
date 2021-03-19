@@ -4,6 +4,7 @@
 \alias{get_vod_data}
 \title{Get Vod Data
 @return VOD INFO
+@param vod_id this vod id can be found after using the get_clip_data function.
 @references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
 @import dplyr
 @import httr}
@@ -13,6 +14,7 @@ get_vod_data(vod_id)
 \description{
 Get Vod Data
 @return VOD INFO
+@param vod_id this vod id can be found after using the get_clip_data function.
 @references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
 @import dplyr
 @import httr

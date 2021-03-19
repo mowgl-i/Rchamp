@@ -14,12 +14,42 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Yo this is my first ever package, just testing some stuff out. 
+# How to get started. 
 
-```{r setup}
+Right now, the package is being developed so use the following code to install the package. 
+
+```{r setup, warning=FALSE,message=FALSE,error=FALSE}
 devtools::install_github('mowgl-i/Rchamp@Development')
 library(Rchamp)
+```
 
-Rchamp::simple_function()
+
+
+## Twitch clip id
+
+You'll want to have a slug/clip id to start with. 
+
+This is the url a twitch clip : https://clips.twitch.tv/GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ
+
+The slug/id can be found after the last shash : GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ
+
+You will use this slug in the `get_clip_data()` and `get_clip_chat()` functions like so... `get_clip_data('slug')`
+
+
+This will return
+
+Messages as a list
+Users as a list
+Full data as list
+Dataframe containing messages and Unsers
+
+```{r}
+
+get_clip_chat('GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ')
+```
+
+```{r}
+head(chat_dataframe)
 
 ```
+

@@ -1,5 +1,6 @@
 #'  Get Clip Data
 #'  @return A list with clip information
+#'  @param clip_id the clip slug. Can be found in the url of the twitch clip.
 #'  @references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
 #'  @import dplyr
 #'  @import httr
