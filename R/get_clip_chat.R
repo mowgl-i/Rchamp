@@ -25,7 +25,7 @@
 
 
 
-get_clip_chat <- function(clip_id){
+get_clip_chat <- function(clip_id, json_output = FALSE){
 
    attemps = c(0:6)
    attemp_sleep = 10
@@ -38,18 +38,19 @@ get_clip_chat <- function(clip_id){
                       "_prev":"arsotn_",
                       "_next":"arstnnn_"}'
 
-  chats<-fromJSON(chats)
+  chats<-jsonlite::fromJSON(chats)
 
 
-  clip_content<-get_clip_data(clip_id)
+  clip_content<-Rchamp::get_clip_data(clip_id)
 
   endofclipoffset <- clip_content$vod$offset + clip_content$duration
   clipoffset <- clip_content$vod$offset
   vod_id = clip_content$vod$id
   messages_json <<- c()
-  users <<- c()
-  messages <<- c()
-  #badges <<- c()
+  users <- c()
+  messages <- c()
+  badge <- c()
+  badge_type <- c()
 
 
 
@@ -76,21 +77,29 @@ get_clip_chat <- function(clip_id){
           chat_offset = chats$comments[[total_comments]]$content_offset_seconds
           progress = chat_offset - clipoffset
           progress_number = (progress*100/clip_content$duration)
-        if(progress_number > 100){
-        progress_number = 100
-        print('Downloading 100% complete')
+
+        if(json_output == TRUE){
+          messages_json <<- append(messages_json, chats$comments)
         }
 
         for(comment in chats$comments){
           if(comment$content_offset_seconds >= clipoffset & comment$content_offset_seconds <= endofclipoffset){
-            messages <<- append(messages, comment$message$body)
-            users <<- append(users, comment$commenter$display_name)
-            #badges <<- append(badges, comment$message$user_badges[[1]]$`_id`)
-            messages_json <<- append(messages_json, comment)
 
+            messages <- append(messages, comment$message$body)
+            users <- append(users, comment$commenter$display_name)
+
+              if('user_badges' %in% names(comment$message)){
+                badge<-append(badge,comment$message$user_badges[[1]]$`_id`)
+                badge_type <- append(badge_type,comment$message$user_badges[[1]]$version)
+              }else{badge<-append(badge,'No Badge')
+              badge_type<-append(badge_type,'No Badge')}
           }
         }
 
+        if(progress_number >= 100){
+            progress_number = 100
+            print('Downloading 100% complete')
+          }
         print(progress_number)
         break
         }
@@ -98,11 +107,32 @@ get_clip_chat <- function(clip_id){
         else{print('No chats recieved, something is wrong')}
         break
       }}
-  data <- c(list(messages),list(users))
-  chat_dataframe <<- as.data.frame(data, col.names = c('message','user'))
-  }
+
+  data <- c(list(messages),list(users),list(badge),list(badge_type))
+  chat_dataframe <<- as.data.frame(data, col.names = c('message','user','badges','badge_version'))
+}
+
+#test<-get_clip_data('GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ')
+
+# badge <- c()
+# messages <- c()
+# users <- c()
+# badge_type <- c()
+# for(comment in chats$comments){
+#  # if(comment$content_offset_seconds >= clipoffset & comment$content_offset_seconds <= endofclipoffset){
+#     messages <- append(messages, comment$message$body)
+#     users <- append(users, comment$commenter$display_name)
+#     if('user_badges' %in% names(comment$message)){
+#      badge<-append(badge,comment$message$user_badges[[1]]$`_id`)
+#      badge_type <- append(badge_type,comment$message$user_badges[[1]]$version)
+#     }else{badge<-append(badge,'No Badge')
+#           badge_type<-append(badge_type,'No Badge')}
+#     data_test <- c(list(messages),list(users),list(badge),list(badge_type))
+#     chat_dataframe_test <<- as.data.frame(data_test, col.names = c('message','user','badges','badge_version'))
+#  # }
+#
+# }
 
 
 
 
-#get_clip_chat('PunchyMagnificentTurtleVoteYea-_nTmbJ654JqTDw5C')
