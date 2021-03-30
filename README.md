@@ -1,6 +1,5 @@
 # Rchamp - Rpackage to flirt with Twitch API
-
-![image](https://i.imgur.com/ib1tQWi.png)
+<img src="https://i.imgur.com/ib1tQWi.png" width="300" height="300"> 
 
 ----
 
