@@ -27,7 +27,7 @@ Thanks to Freguglia and Favstats. They've created a function `twitch_auth()` to 
 Make sure you have a valid [client id and secret](https://dev.twitch.tv/docs/authentication#registration) to access the api. Once you have it, you can leverage the `twitch_auth()` function which relies on the `use_this` package to edit the environment. Follow step by step below or [see here for more info on Twitch Authentication from Freguglia and Favstats](https://github.com/Freguglia/rTwitchAPI). 
 
 
-### Step by step
+### Step by step O-auth
 ---
  1. In console 
   ```R 
@@ -40,7 +40,8 @@ Make sure you have a valid [client id and secret](https://dev.twitch.tv/docs/aut
   
   ```R 
   
-  TWITCH_CLIENT_ID=YOUR_CLIENT_ID TWITCH_CLIENT_SECRET=YOUR_CLIENT_SECRET
+  TWITCH_CLIENT_ID=YOUR_CLIENT_ID 
+  TWITCH_CLIENT_SECRET=YOUR_CLIENT_SECRET
   
   ```
  3. Save and restart R
