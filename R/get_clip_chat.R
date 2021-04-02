@@ -130,56 +130,56 @@ get_clip_chat <- function(clip_id, json_output = FALSE){
   data <- c(list(messages),list(users),list(badge),list(badge_type),list(emotes))
   chat_dataframe <<- as.data.frame(data, col.names = c('message','user','badges','badge_version','emotes'))
 }
-
-get_clip_chat('GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ')
-
-# badge <- c()
-# messages <- c()
-# users <- c()
-# badge_type <- c()
-# emotes <- c()
-# emotes_in_message <- c()
-# chat_dataframe_test <- c()
-
-for(comment in messages_json){
-  # if(comment$content_offset_seconds >= clipoffset & comment$content_offset_seconds <= endofclipoffset){
-
-  messages <- append(messages, comment$message$body)
-  users <- append(users, comment$commenter$display_name)
-
-  if('user_badges' %in% names(comment$message)){
-    badge<-append(badge,comment$message$user_badges[[1]]$`_id`)
-    badge_type <- append(badge_type,comment$message$user_badges[[1]]$version)
-  }else{badge<-append(badge,'No Badge')
-  badge_type<-append(badge_type,'No Badge')}
-
-  emotes_in_message <- c()
-
-  for(frag in comment$message$fragments){
-
-    if('emoticon' %in% names(frag)){
-      emotes_in_message <- append(emotes_in_message,frag$text)}
-  }
-
-  if(is.null(emotes_in_message)){emotes_in_message <- 'No Emotes'}
-
-  emotes_in_message <- unique(emotes_in_message)
-
-  emotes_in_message <- paste(emotes_in_message,collapse = " ")
-
-  print(emotes_in_message)
-
-  emotes <- append(emotes,emotes_in_message)
-
-  }
-
-  data_test <- c(list(messages),
-                 list(users),
-                 list(badge),
-                 list(badge_type),
-                 list(emotes))
-
-  chat_dataframe_test <<- as.data.frame(data_test, col.names = c('message','user','badges','badge_version','emotes'))
-# }
+#
+# get_clip_chat('GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ')
+#
+# # badge <- c()
+# # messages <- c()
+# # users <- c()
+# # badge_type <- c()
+# # emotes <- c()
+# # emotes_in_message <- c()
+# # chat_dataframe_test <- c()
+#
+# for(comment in messages_json){
+#   # if(comment$content_offset_seconds >= clipoffset & comment$content_offset_seconds <= endofclipoffset){
+#
+#   messages <- append(messages, comment$message$body)
+#   users <- append(users, comment$commenter$display_name)
+#
+#   if('user_badges' %in% names(comment$message)){
+#     badge<-append(badge,comment$message$user_badges[[1]]$`_id`)
+#     badge_type <- append(badge_type,comment$message$user_badges[[1]]$version)
+#   }else{badge<-append(badge,'No Badge')
+#   badge_type<-append(badge_type,'No Badge')}
+#
+#   emotes_in_message <- c()
+#
+#   for(frag in comment$message$fragments){
+#
+#     if('emoticon' %in% names(frag)){
+#       emotes_in_message <- append(emotes_in_message,frag$text)}
+#   }
+#
+#   if(is.null(emotes_in_message)){emotes_in_message <- 'No Emotes'}
+#
+#   emotes_in_message <- unique(emotes_in_message)
+#
+#   emotes_in_message <- paste(emotes_in_message,collapse = " ")
+#
+#   print(emotes_in_message)
+#
+#   emotes <- append(emotes,emotes_in_message)
+#
+#   }
+#
+#   data_test <- c(list(messages),
+#                  list(users),
+#                  list(badge),
+#                  list(badge_type),
+#                  list(emotes))
+#
+#   chat_dataframe_test <<- as.data.frame(data_test, col.names = c('message','user','badges','badge_version','emotes'))
+# # }
 
 
