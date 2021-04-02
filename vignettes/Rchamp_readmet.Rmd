@@ -1,6 +1,6 @@
 ---
 title: "Rchamp_readme"
-output: rmarkdown::github_document
+output: github_document
 ---
 
 ```{r, include = FALSE}
