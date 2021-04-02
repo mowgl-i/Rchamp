@@ -4,7 +4,7 @@
 \alias{get_clip_chat}
 \title{Get Clip chat by using vod info}
 \usage{
-get_clip_chat(clip_id)
+get_clip_chat(clip_id, json_output = FALSE)
 }
 \description{
 @description Uses the clip slug to determine the clip offset and gather the chat from the clip by navitating to the VOD at the offset.
