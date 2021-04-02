@@ -24,16 +24,24 @@ devtools::install_github(mowgl-i/Rchamp)
 ----
 Thanks to Freguglia and Favstats. They've created a function `twitch_auth()` to leverage the new helix api from Twitch. 
 
-Make sure you have a valid [client id and secret](https://dev.twitch.tv/docs/authentication#registration) to access the api. Once you have it, you can leverage the `twitch_auth()` function which relies on the `use_this` package to edit the environment. 
+Make sure you have a valid [client id and secret](https://dev.twitch.tv/docs/authentication#registration) to access the api. Once you have it, you can leverage the `twitch_auth()` function which relies on the `use_this` package to edit the environment. Follow step by step below or [see here for more info on Twitch Authentication from Freguglia and Favstats](https://github.com/Freguglia/rTwitchAPI). 
+
 
 ### Step by step
 ---
- 1. In console ```R usethis::edit_r_environ() ```
- 2. Edit file:  ```R TWITCH_CLIENT_ID=YOUR_CLIENT_ID TWITCH_CLIENT_SECRET=YOUR_CLIENT_SECRET```
- 3. Save and restart R
-
-
-
-
-[See here for more info on Twitch Authentication from Freguglia and Favstats](https://github.com/Freguglia/rTwitchAPI). 
+ 1. In console 
+   ```R 
+    
+    usethis::edit_r_environ() 
+    
+    ```
+ 
+ 2. Edit file:  
+  
+  ```R 
+  
+  TWITCH_CLIENT_ID=YOUR_CLIENT_ID TWITCH_CLIENT_SECRET=YOUR_CLIENT_SECRET
+  
+  ```
+ 4. Save and restart R
 
