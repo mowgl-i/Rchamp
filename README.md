@@ -30,11 +30,11 @@ Make sure you have a valid [client id and secret](https://dev.twitch.tv/docs/aut
 ### Step by step
 ---
  1. In console 
-   ```R 
+  ```R 
     
     usethis::edit_r_environ() 
     
-    ```
+  ```
  
  2. Edit file:  
   
@@ -43,5 +43,5 @@ Make sure you have a valid [client id and secret](https://dev.twitch.tv/docs/aut
   TWITCH_CLIENT_ID=YOUR_CLIENT_ID TWITCH_CLIENT_SECRET=YOUR_CLIENT_SECRET
   
   ```
- 4. Save and restart R
+ 3. Save and restart R
 
