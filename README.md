@@ -1,4 +1,4 @@
-<img align="right"src="https://i.imgur.com/ib1tQWi.png" width="300" height="300"> 
+<img align="right" src="https://i.imgur.com/ib1tQWi.png" width="300" height="300"> 
 
 # Rchamp - Rpackage to flirt with Twitch API
 
