@@ -128,10 +128,11 @@ get_clip_chat <- function(clip_id, json_output = FALSE){
       }}
 
   data <- c(list(messages),list(users),list(badge),list(badge_type),list(emotes))
-  chat_dataframe <<- as.data.frame(data, col.names = c('message','user','badges','badge_version','emotes'))
+  chat_dataframe <<- as.data.frame(data, col.names = c('message','user','badges','badge_version','global_emotes'))
 }
+
 #
-# get_clip_chat('GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ')
+#get_clip_chat('GracefulIntelligentKathyMikeHogu-uIO9Kd0g_KDqb4mQ')
 #
 # # badge <- c()
 # # messages <- c()
