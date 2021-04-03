@@ -46,7 +46,7 @@ Make sure you have a valid [client id and secret](https://dev.twitch.tv/docs/aut
   ```
  3. Save and restart R
 
-# Wana know how to use it? Check out the [vignette]()
+# Wana know how to use it? Check out the [vignette](https://github.com/mowgl-i/Rchamp/blob/Development/vignettes/Rchamp_readmet.md)
 
 This project would have been way harder without the following open-source masterminds.
 [Ogulcan Celik](https://github.com/OgulcanCelik/twitch-clip-chat) - Genius idea of locating clip location via `_next` and comment time stamp. 
