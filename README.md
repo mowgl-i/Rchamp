@@ -46,3 +46,5 @@ Make sure you have a valid [client id and secret](https://dev.twitch.tv/docs/aut
   ```
  3. Save and restart R
 
+# Wana know how to use it? Check out the [vignette]()
+
