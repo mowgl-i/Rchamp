@@ -46,3 +46,4 @@ Make sure you have a valid [client id and secret](https://dev.twitch.tv/docs/aut
   ```
  3. Save and restart R
 
+# Need more instructions? Check out the [vignette](https://github.com/mowgl-i/Rchamp/blob/Development/vignettes/Rchamp_readmet.md)
