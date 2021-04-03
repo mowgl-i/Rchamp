@@ -4,7 +4,7 @@
 
 ``` Rchamp ``` is an R package to interact :wink: with the twitch API. This makes calls to the helix version and V5 version (depreciated) of the Twitch api. 
 
-But why :question-mark:, well...
+But why :question: , well...
 
 If you love R & Twitch like I do, then this package saves you the effort of going 'off-platform' to another language to fetch the data and the headache of messy dense code when making calls to twich using `httr`. This package is not supported or affiliated with Twitch. By using it, you abide by their [dev agreement](https://www.twitch.tv/p/en/legal/developer-agreement/).  
 
