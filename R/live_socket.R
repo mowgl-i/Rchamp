@@ -1,8 +1,8 @@
 server = 'irc.chat.twitch.tv'
 port = 6667
-nickname = 'lsf_mowgli_chat'
-token = 'oauth:vxcow8r2e4iqtuu34vbzso9bbptz2y'
-channel = '#adrianachechik_'
+nickname = 'mowgl_i'
+token = 'oauth:6gasi0wylcqm7tm8wv062ikpwgesnr'
+channel = '#xqcow'
 
 library(stringi)
 library(websocket)
@@ -20,5 +20,19 @@ live_socket <- function(channel){
  responce <- enc2utf8(read.socket(con))
  }
 
+#https://cran.r-project.org/web/packages/websocket/readme/README.html
 
-ws <- WebSocket$new('irc.chat.twitch.tv')
+ws <- WebSocket$new('ws://irc-ws.chat.twitch.tv:80')
+
+ws$onMessage(function(event){
+  cat('client got msg: ',event$data, "\n")
+})
+
+ws$send(stri_enc_toutf8(password))
+ws$send(stri_enc_toutf8(nickname))
+ws$send(stri_enc_toutf8(channel))
+
+ws$send(stri_enc_toutf8('PONG :tmi.twitch.tv'))
+
+
+
