@@ -50,3 +50,7 @@ ws$send(stri_enc_toutf8(channel))
 ws$close()
 ws$connect()
 
+
+
+log <- read.table('twitch_data.log',fill =T,sep = ":")
+
