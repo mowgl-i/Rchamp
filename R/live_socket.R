@@ -10,6 +10,7 @@ library(websocket)
 #library(logging)
 library(logger)
 library(dplyr)
+library(readr)
 
 live_socket <- function(channel){
   password = stri_enc_toutf8(paste0('PASS ',token))
@@ -51,6 +52,8 @@ ws$close()
 ws$connect()
 
 
-
+install.packages('readr')
 log <- read.table('twitch_data.log',fill =T,sep = ":")
+log <- read_log('twitch_data.log')
+
 
