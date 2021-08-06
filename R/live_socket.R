@@ -1,59 +1,87 @@
-server = 'irc.chat.twitch.tv'
-port = 6667
-nickname = 'mowgl_i'
-token = 'oauth:t0b5hj5zkbhdtt8its7rot6uze0ax5'
-channel = '#healthygamer_gg'
-
 library(stringi)
 library(stringr)
 library(websocket)
-#library(logging)
 library(logger)
 library(dplyr)
 library(readr)
 
-live_socket <- function(channel){
-  password = stri_enc_toutf8(paste0('PASS ',token))
-  nickname = stri_enc_toutf8(paste0('NICK ',nickname))
-  channel = stri_enc_toutf8(paste0('JOIN ',channel))
- con <-make.socket(port = 1234,host = 'irc.chat.twitch.tv',server=F)
- on.exit(close.socket(con))
- open.connection(con)
- write.socket(con,paste0('PASS ',token))
- write.socket(con,nickname)
- write.socket(con,channel)
- responce <- enc2utf8(read.socket(con))
- }
-
-#https://cran.r-project.org/web/packages/websocket/readme/README.html
-
-#logging::basicConfig(level = 'FINEST')
-#logging::addHandler(writeToFile,logger = "Twitch_log",file ='~/twitch.log')
-
-log_appender(appender_file('twitch_data.log'))
-
-ws <- WebSocket$new('ws://irc-ws.chat.twitch.tv:80')
-
-ws$onMessage(function(event){
-  cat('client got msg: ',event$data, "\n")
-  data <<- event$data
-  log_info(data)
-  log_appender()
-  if (str_detect(string = data,pattern = 'PING')){
-    ws$send(stri_enc_toutf8('PONG :tmi.twitch.tv'))
-  }})
+#'  Get Clip Data
+#'  @return A list with clip information
+#'  @param clip_id the clip slug. Can be found in the url of the twitch clip.
+#'  @references https://github.com/Freguglia/rTwitchAPI/blob/master/R/get_clip.R
+#'  @import stringi
+#'  @import stringr
+#'  @import websocket
+#'  @import logger
+#'  @import dplyr
+#'  @import readr
+#' @importFrom stringi stri_enc_toutf8
+#' @importFrom stringr str_detect
+#' @importFrom stringr str_extract
+#' @importFrom dplyr tibble
+#' @importFrom magrittr %>%
+#' @importFrom readr readlines
+#' @export
 
 
-ws$send(stri_enc_toutf8(password))
-ws$send(stri_enc_toutf8(nickname))
-ws$send(stri_enc_toutf8(channel))
+live_socket <- function(channel_name){
+  port = 6667
+  channel <- paste0("#",channel_name)
+  #channel <- '#mizkif'
+  password <- stri_enc_toutf8(paste0('PASS ',Sys.getenv('TWITCH_OAUTH')))
+  nickname <- stri_enc_toutf8(paste0('NICK ',Sys.getenv('TWITCH_USER')))
+  channel <- stri_enc_toutf8(paste0('JOIN ',channel))
+  print(password)
+  print(nickname)
+  print(channel)
+  ws <- WebSocket$new('ws://irc-ws.chat.twitch.tv:80')
 
-ws$close()
-ws$connect()
+  ws$onClose(function(event){
+    cat('Client Disconnected\n')
+    ws$close()
+
+  })
+
+  wsws$onOpen(function(event){
+    cat('Client Connected \n')
+  })
+
+  log_appender(appender_file('twitch_data_1.log'))
+
+  ws$onMessage(function(event){
+    cat('client got msg: ',event$data, "\n")
+    data <- event$data
+    log_info(data)
+    log_appender()
+    if (str_detect(string = data,pattern = 'PING')){
+      ws$send(stri_enc_toutf8('PONG :tmi.twitch.tv'))
 
 
-install.packages('readr')
-log <- read.table('twitch_data.log',fill =T,sep = ":")
-log <- read_log('twitch_data.log')
 
+    }})
 
+  Sys.sleep(2)
+  ws$send(password)
+  Sys.sleep(2)
+  ws$send(nickname)
+  Sys.sleep(2)
+  ws$send(channel)
+  return(ws)
+
+}
+
+test<-live_socket('mizkif')
+
+clean_log <- function(log_file)
+  { log_3 <- read_lines(log_file)
+  log_4<-str_detect(string = log_3,pattern = 'INFO')
+  log_5<-log_3[log_4]
+  user <-str_extract(string = log_5,pattern = '(?<=........................:)\\w+')
+  channel <-str_extract(string = log_5,pattern = '(?<= #).*(?=:)')
+  message <- str_extract(string = log_5,pattern = '([^:]*$)')
+  timestamp <- str_extract(string = log_5, pattern = '(?<=\\[).*(?=\\])')
+  data <- tibble('user' = user, 'channel' = channel, 'message' = message, 'timestamp'= timestamp)
+  return(data)
+  }
+
+data<-clean_log('twitch_data.log')
