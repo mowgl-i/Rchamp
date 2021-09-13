@@ -51,5 +51,3 @@ Make sure you have a valid [client id and secret](https://dev.twitch.tv/docs/aut
 This project would have been way harder without the following open-source masterminds.
 [Ogulcan Celik](https://github.com/OgulcanCelik/twitch-clip-chat) - Genius idea of locating clip location via `_next` and comment time stamp. 
 [Freguglia and Favstats](https://github.com/Freguglia/rTwitchAPI) - The O-auth function to begin using the helix version of Twitch API.
-
-test
