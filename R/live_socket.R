@@ -42,16 +42,14 @@ live_socket <- function(channel_name){
 
   })
 
-  wsws$onOpen(function(event){
+  ws$onOpen(function(event){
     cat('Client Connected \n')
   })
 
   log_appender(appender_file('twitch_data_1.log'))
 
   ws$onMessage(function(event){
-    cat('client got msg: ',event$data, "\n")
-    data <- event$data
-    log_info(data)
+    log_info(event$data)
     log_appender()
     if (str_detect(string = data,pattern = 'PING')){
       ws$send(stri_enc_toutf8('PONG :tmi.twitch.tv'))
@@ -70,7 +68,7 @@ live_socket <- function(channel_name){
 
 }
 
-test<-live_socket('mizkif')
+test<-live_socket('summit1g')
 
 clean_log <- function(log_file)
   { log_3 <- read_lines(log_file)
