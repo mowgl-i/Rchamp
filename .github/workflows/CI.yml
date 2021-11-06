@@ -6,7 +6,7 @@
 # See https://github.com/r-lib/actions/tree/master/examples#readme for
 # additional example workflows available for the R community.
 
-name: R
+name: Rchamp_test
 
 on:
   push:
@@ -15,23 +15,23 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        r-version: [3.5, 3.6]
-
+  run:
+    runs-on: [ubuntu-latest]
+    container: docker://dvcorg/cml:latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up R ${{ matrix.r-version }}
-        uses: r-lib/actions/setup-r@ffe45a39586f073cc2e9af79c4ba563b657dc6e3
-        with:
-          r-version: ${{ matrix.r-version }}
-      - name: Install dependencies
+      
+      - name: Setup R
+        uses: r-lib/actions/setup-r@master
+        
+      - name: Setup dependencies
         run: |
-          install.packages(c("remotes", "rcmdcheck"))
-          remotes::install_deps(dependencies = TRUE)
-        shell: Rscript {0}
-      - name: Check
-        run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
-        shell: Rscript {0}
+          R -e 'install.packages("renv")' 
+          R -e 'renv::restore()'
+          
+      - name: Run First function
+        env: 
+          repo_token: ${{ secrets.GITHUB_TOKEN }} 
+        run: |
+          R -e 'renv::run("first_function.R")'
+          
