@@ -33,5 +33,5 @@ jobs:
         env: 
           repo_token: ${{ secrets.GITHUB_TOKEN }} 
         run: |
-          R -e 'renv::run("first_function.R")'
+          R -e 'renv::run("R/first_function.R")'
           
