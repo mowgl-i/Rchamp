@@ -20,6 +20,9 @@ jobs:
     container: docker://dvcorg/cml:latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: Install linux packages
+        run: sudo apt-get install libcurl4-openssl-dev
       
       - name: Setup R
         uses: r-lib/actions/setup-r@master
